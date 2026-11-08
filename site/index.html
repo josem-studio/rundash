@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0d0f10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RunDash">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<title>RunDash</title>
+<style>
+:root{--bg:#0d0f10;--card:#1a1d1f;--card2:#202427;--text:#f2f1ee;--muted:#9a9d9f;--line:#2a2e30;
+  --accent:#ff5a2e;--accent2:#ffb347;--good:#3ddc84;--bad:#ff4d4d;--strava:#fc4c02;--glow:#1f1511;}
+@media (prefers-color-scheme:light){:root{--bg:#f6f5f2;--card:#fff;--card2:#f1efe9;--text:#17191a;--muted:#6b6e70;--line:#e4e1da;--glow:#fff0e8;}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--text);letter-spacing:.01em;
+  background:radial-gradient(circle at 15% 0,var(--glow) 0,var(--bg) 45%),var(--bg);
+  font-family:-apple-system,'SF Pro Display','Segoe UI',system-ui,Roboto,sans-serif;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+.wrap{max-width:980px;margin:0 auto;padding:24px 18px 56px}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+h1{font-size:1.9rem;margin:0;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,var(--text),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{background:var(--card2);border:1px solid var(--line);color:var(--muted);font-weight:600;padding:8px 12px;border-radius:14px;font-size:.78rem;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--good)}
+.dot.warn{background:var(--accent2)}.dot.bad{background:var(--bad)}
+.streak{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1a1200;border:0;font-weight:700}
+button{font:inherit;color:inherit}
+.iconbtn{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:8px 12px;cursor:pointer;font-size:.9rem}
+.iconbtn:active{opacity:.6}
+.banner{padding:12px 14px;border-radius:12px;background:var(--card2);border-left:4px solid var(--accent2);font-size:.82rem;color:var(--muted);margin-bottom:14px}
+.banner.bad{border-left-color:var(--bad)}.banner b{color:var(--text)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;position:relative;overflow:hidden;margin-bottom:16px;box-shadow:0 12px 32px -14px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.03)}
+.grid .card{margin-bottom:0}
+.card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:.8}
+h2{font-size:.78rem;margin:0 0 14px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card2);border-radius:14px;padding:14px 10px;text-align:center}
+.num{font-size:1.4rem;font-weight:800;color:var(--accent)}
+.lbl{font-size:.68rem;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:var(--card2);border-radius:10px;padding:8px 12px;font-size:.78rem;color:var(--muted)}
+.chip b{color:var(--text)}
+.box{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--card2);font-size:.82rem;color:var(--muted);border-left:4px solid transparent}
+.box b{color:var(--text)}
+.box.ok{border-left-color:var(--good)}.box.warn{border-left-color:var(--accent2)}.box.bad{border-left-color:var(--bad)}
+.track{display:flex;flex-direction:column;align-items:center}
+.track svg{width:100%;max-width:280px}
+.track-stats{display:flex;justify-content:space-around;width:100%}
+.track-stats .n{font-size:1.1rem;font-weight:800;text-align:center}
+.track-stats .l{font-size:.66rem;color:var(--muted);text-transform:uppercase;text-align:center}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+@media(max-width:700px){.days{grid-template-columns:repeat(2,1fr)}}
+.day{background:var(--card2);border-radius:16px;padding:12px 8px;text-align:center;display:flex;flex-direction:column;gap:5px;border:1px solid transparent}
+.day.today{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,90,46,.15)}
+.day.rest{opacity:.7}
+.dow{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.dd{font-size:.72rem;color:var(--muted)}
+.ico{font-size:1.4rem;margin:2px 0}
+.type{font-size:.78rem;font-weight:700;min-height:2.2em}
+.km{font-size:.78rem;color:var(--accent);font-weight:700}
+.gbtn{margin-top:4px;background:var(--line);border:0;font-size:.68rem;padding:7px 6px;border-radius:8px;cursor:pointer}
+.gbtn.ok{background:var(--good);color:#06270f}
+.note{font-size:.7rem;color:var(--muted);margin-top:10px}
+.list{display:flex;flex-direction:column;gap:10px}
+.reco{display:flex;gap:10px;padding:12px;border-radius:12px;background:var(--card2);font-size:.85rem;line-height:1.4}
+.reco .ri{font-size:1.2rem}.reco b{color:var(--text)}
+.races{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:650px){.races{grid-template-columns:1fr}}
+.race{background:var(--card2);border-radius:14px;padding:14px}
+.rname{font-weight:700;font-size:.9rem}
+.rmeta{color:var(--accent2);font-size:.75rem;font-weight:700;margin:4px 0 6px}
+.rnote{color:var(--muted);font-size:.78rem}
+footer{text-align:center;color:var(--muted);font-size:.72rem;margin-top:26px}
+.skeleton{color:var(--muted);text-align:center;padding:40px 0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1 id="hello">🏃 Hola</h1><div class="sub" id="todayLine">Cargando…</div></div>
+    <div class="badges">
+      <div class="badge" id="syncBadge"><span class="dot warn" id="syncDot"></span><span id="syncTxt">Strava</span></div>
+      <div class="badge streak" id="streakBadge" hidden>🔥 <span id="streakVal"></span> semanas</div>
+      <button class="iconbtn" id="refreshBtn" aria-label="Actualizar datos" title="Actualizar">↻</button>
+    </div>
+  </header>
+
+  <div class="banner bad" id="err" hidden><b>No se pudieron cargar los datos.</b> <span id="errMsg"></span></div>
+  <div class="banner" id="stale" hidden></div>
+
+  <div id="app" hidden>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="stKm">–</div><div class="lbl">Km (180 días)</div></div>
+      <div class="stat"><div class="num" id="stRuns">–</div><div class="lbl">Carreras</div></div>
+      <div class="stat"><div class="num" id="stLong">–</div><div class="lbl">Más larga</div></div>
+      <div class="stat"><div class="num" id="stPred">–</div><div class="lbl" id="stPredLbl">Maratón estimado</div></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 id="goalTitle">Meta</h2>
+        <div style="display:flex;gap:10px">
+          <div class="stat" style="flex:1"><div class="num" id="daysLeft">–</div><div class="lbl">Días</div></div>
+          <div class="stat" style="flex:1"><div class="num" id="weeksLeft">–</div><div class="lbl">Semanas</div></div>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="box" id="trajBox" hidden></div>
+        <div class="box" id="paceBox" hidden></div>
+      </div>
+
+      <div class="card">
+        <h2>Objetivo semanal</h2>
+        <div class="track">
+          <svg viewBox="0 0 300 150" role="img" aria-label="Progreso semanal en la pista">
+            <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffb347"/><stop offset="100%" stop-color="#ff5a2e"/></linearGradient></defs>
+            <path d="M75,20 H225 A55,55 0 0 1 225,130 H75 A55,55 0 0 1 75,20 Z" fill="none" stroke="var(--line)" stroke-width="16" stroke-linecap="round"/>
+            <path id="trackFg" d="M75,20 H225 A55,55 0 0 1 225,130 H75 A55,55 0 0 1 75,20 Z" fill="none" stroke="url(#grad)" stroke-width="16" stroke-linecap="round"/>
+            <text x="150" y="68" text-anchor="middle" font-size="26" font-weight="800" fill="var(--text)" id="trackPct">0%</text>
+            <text x="150" y="88" text-anchor="middle" font-size="11" fill="var(--muted)">completado</text>
+            <text id="runner" x="75" y="26" text-anchor="middle" font-size="20">🏃</text>
+          </svg>
+          <div class="track-stats">
+            <div><div class="n" id="tDone">–</div><div class="l">Km hechos</div></div>
+            <div><div class="n" id="tTarget">–</div><div class="l">Objetivo</div></div>
+            <div><div class="n" id="tLeft">–</div><div class="l">Km faltan</div></div>
+          </div>
+        </div>
+        <div class="box" id="weekAlert"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Agenda de la semana</h2>
+      <div class="days" id="days"></div>
+      <div class="note">"Copiar entreno" copia el texto para pegarlo en Garmin Connect (no hay conexión directa con el reloj). Los ritmos son orientativos y salen de tus últimas 4 semanas.</div>
+    </div>
+
+    <div class="card">
+      <h2>Recomendaciones (según tu última carrera)</h2>
+      <div class="list" id="recos"></div>
+    </div>
+
+    <div class="card">
+      <h2>Próximas carreras en España</h2>
+      <div class="races" id="races"></div>
+    </div>
+  </div>
+  <div class="skeleton" id="loading">Cargando tus datos de Strava…</div>
+  <noscript><div class="banner bad">Esta página necesita JavaScript.</div></noscript>
+  <footer id="foot">Datos de Strava</footer>
+</div>
+
+<script>
+"use strict";
+// ================= CONFIGURA AQUÍ (carreras: edítalas cuando quieras) =================
+const RACES = [
+  { n: "Cursa dels Bombers", d: "2026-11-09", dist: "10K", loc: "Barcelona", note: "Cursa popular de Barcelona." },
+  { n: "Jean Bouin", d: "2026-11-22", dist: "10K", loc: "Barcelona", note: "Clásica popular barcelonesa." },
+  { n: "Cursa dels Nassos", d: "2026-12-31", dist: "10K / 5K", loc: "Barcelona", note: "Carrera popular de fin de año." },
+  { n: "Mitja Marató Barcelona", d: "2027-02-14", dist: "21K", loc: "Barcelona", note: "Buena tirada de control unas semanas antes de la maratón." },
+];
+// Peso de cada día de la semana para repartir los km que faltan (Lun..Dom). 0 = descanso.
+const DAY_WEIGHT = [0, 1, 1, 1, 0, 2.2, 1.5];
+// Nombre que se muestra en el saludo. Déjalo vacío ("") si prefieres no mostrarlo en una página pública.
+const OWNER = "Jose";
+// =======================================================================================
+const TZ = "Europe/Madrid";
+const DOW = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+// ---- fechas: claves "YYYY-MM-DD" y aritmética en UTC (sin errores de zona horaria) ----
+const dayFmt = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
+const todayKey = () => dayFmt.format(new Date());
+const parseKey = (k) => { const [y, m, d] = k.split("-").map(Number); return new Date(Date.UTC(y, m - 1, d)); };
+const addDays = (k, n) => { const d = parseKey(k); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+const mondayOf = (k) => addDays(k, -((parseKey(k).getUTCDay() + 6) % 7));
+const diffDays = (a, b) => Math.round((parseKey(a) - parseKey(b)) / 86400000);
+const fmtShort = (k) => new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "short", timeZone: "UTC" }).format(parseKey(k));
+const fmtLong = (k) => new Intl.DateTimeFormat("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(parseKey(k));
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+// ---- formatos ----
+const nf = (n, dec = 1) => Number(n).toLocaleString("es-ES", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const pace = (s) => { if (s == null) return "–"; s = Math.round(s); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+const hm = (sec) => { const m = Math.round(sec / 60); return Math.floor(m / 60) + "h" + String(m % 60).padStart(2, "0") + "m"; };
+const ago = (ms) => { const m = Math.max(0, Math.round(ms / 60000)); if (m < 1) return "ahora"; if (m < 60) return "hace " + m + " min"; const h = Math.round(m / 60); return h < 48 ? "hace " + h + " h" : "hace " + Math.round(h / 24) + " días"; };
+const rel = (n) => (n === 0 ? "hoy" : n === 1 ? "mañana" : "en " + n + " días");
+
+// ---- lógica pura (agenda, recomendaciones) ----
+function easyRange(d) {
+  const p = d.stats && d.stats.pace_28d;
+  return p ? pace(p + 5) + "–" + pace(p + 35) : "5:40–6:10";
+}
+
+function roleFor(i, km) {
+  if (km >= 15) return { t: "Tirada larga", ico: "🏔️" };
+  if (i === 1 && km >= 6) return { t: "Series / umbral", ico: "⚡" };
+  return { t: "Rodaje fácil", ico: "🟢" };
+}
+
+function buildAgenda(d, today) {
+  const { days, target, km } = d.week;
+  const remaining = Math.max(0, target - km);
+  const cand = [];
+  days.forEach((x, i) => { if (x.date > today || (x.date === today && x.km === 0)) cand.push(i); });
+  let sel = cand.filter((i) => DAY_WEIGHT[i] > 0);
+  if (!sel.length) sel = cand.slice();
+  sel.sort((a, b) => (DAY_WEIGHT[b] || 1) - (DAY_WEIGHT[a] || 1) || b - a);
+  let alloc = {};
+  while (sel.length) {
+    const tot = sel.reduce((s, i) => s + (DAY_WEIGHT[i] || 1), 0);
+    alloc = {};
+    sel.forEach((i) => { alloc[i] = (remaining * (DAY_WEIGHT[i] || 1)) / tot; });
+    if (remaining <= 0 || sel.length === 1 || Math.min(...sel.map((i) => alloc[i])) >= 4) break;
+    sel.pop();
+  }
+  const items = days.map((x, i) => {
+    const base = { i, date: x.date, isToday: x.date === today };
+    if (x.km > 0) return { ...base, state: "done", km: x.km, pace: x.pace };
+    if (remaining > 0 && alloc[i] > 0.5) {
+      const km2 = Math.round(alloc[i] * 10) / 10;
+      return { ...base, state: "plan", km: km2, ...roleFor(i, km2) };
+    }
+    return { ...base, state: "rest" };
+  });
+  const maxKm = Math.max(0, ...Object.values(alloc));
+  return { items, remaining, maxKm, candidates: cand.length };
+}
+
+function weekStatus(d, ag) {
+  const { target, km } = d.week;
+  if (ag.remaining <= 0) return ["ok", "✅ <b>Objetivo cumplido</b> esta semana. Prioriza descanso y movilidad."];
+  if (!ag.candidates) return ["bad", "🚨 <b>Semana cerrada</b> en " + nf(km) + " km de " + target + " km."];
+  if (ag.maxKm >= 24) return ["bad", "🚨 <b>En riesgo</b>: faltan " + nf(ag.remaining) + " km y tendrías que hacer " + nf(ag.maxKm) + " km de golpe. Mejor asume una semana algo más corta."];
+  if (ag.candidates >= 2 && ag.remaining / ag.candidates >= 15) return ["bad", "🚨 <b>En riesgo</b>: faltan " + nf(ag.remaining) + " km en solo " + ag.candidates + " días. Es demasiado volumen en poco tiempo; mejor cerrar la semana por debajo del objetivo."];
+  if (ag.maxKm >= 16) return ["warn", "⚠️ <b>Justo, pero posible</b>: faltan " + nf(ag.remaining) + " km, ideal en una tirada larga de " + nf(ag.maxKm) + " km."];
+  return ["ok", "🟢 <b>Vas a tiempo</b>: faltan " + nf(ag.remaining) + " km repartidos en " + ag.candidates + " día(s) disponibles."];
+}
+
+function trajectoryMsg(d) {
+  const t = d.trajectory;
+  if (!t) return null;
+  if (t.weeks_to_race < 0) return null;
+  if (t.weeks_to_race <= 2) return ["ok", "🏁 <b>Tapering</b>: ya no toca sumar, toca llegar fresco. Esta semana: <b>" + d.week.target + " km</b>."];
+  const next = t.next_target != null ? " y la próxima <b>" + t.next_target + " km</b>" : "";
+  const base = nf(t.base);
+  if (t.status === "ok") return ["ok", "➕ <b>Sigue sumando</b>: esta semana toca <b>" + d.week.target + " km</b>" + next + " (tu media de las últimas 4 semanas: " + base + " km). Subiendo poco a poco, sin pasar de ~10 % por semana, llegas al pico de " + t.peak + " km a tiempo."];
+  if (t.status === "behind") return ["warn", "⚠️ <b>Vas algo por detrás</b>: a este ritmo llegarías a ~" + t.reachable + " km/semana de los " + t.peak + " previstos. Tu media es " + base + " km; para llegar sin saltos bruscos debería estar ya en " + t.floor + " km o más. Esta semana toca <b>" + d.week.target + " km</b>."];
+  return ["bad", "🚨 <b>Meta en riesgo</b>: con tu media de " + base + " km solo llegarías a ~" + t.reachable + " km/semana (el plan pide " + t.peak + "). Necesitas sumar más cuanto antes (tu media debería estar en " + t.floor + " km o más) o replantear la meta con un objetivo más conservador."];
+}
+
+function buildRecos(d, today, ag) {
+  const out = [];
+  const L = d.last_activity, S = d.stats || {};
+  if (!L) return [["🏃", "Sin carreras recientes", "Cuando registres una carrera en Strava, aquí verás recomendaciones basadas en ella."]];
+  const since = diffDays(today, L.date);
+  let level, est = false;
+  if (L.effort != null) level = L.effort >= 100 ? 2 : L.effort >= 50 ? 1 : 0;
+  else if (S.avg_minutes_28d) { const r = L.sec / 60 / S.avg_minutes_28d; level = r >= 1.4 ? 2 : r >= 0.8 ? 1 : 0; est = true; }
+  else { level = 1; est = true; }
+  const when = since === 0 ? "Hoy" : since === 1 ? "Ayer" : "Hace " + since + " días";
+  const what = nf(L.km) + " km a " + pace(L.pace_sec) + "/km";
+  const eff = L.effort != null ? "esfuerzo " + L.effort : "esfuerzo " + ["bajo", "medio", "alto"][level] + " (estimado por duración)";
+  if (since >= 4) out.push(["⏸️", "Llevas " + since + " días sin correr", "Tu última carrera fue de " + what + ". Retoma con un rodaje suave de 5–6 km y sube la carga poco a poco."]);
+  else if (level === 2) out.push(["🛌", "Carga alta en tu última carrera", when + ": " + what + ", " + eff + ". Prioriza hidratación, carbohidratos y sueño; la próxima salida, a ritmo cómodo."]);
+  else if (level === 1) out.push(["🟢", "Carga media", when + ": " + what + ", " + eff + ". Puedes seguir con normalidad el plan de la semana."]);
+  else out.push(["⚡", "Carga baja", when + ": " + what + ", " + eff + ". Si te encuentras bien, tienes margen para meter algo de calidad."]);
+  if (ag.remaining > 0 && ag.candidates) {
+    const long = ag.maxKm >= 15 ? "Reserva una tirada larga de " + nf(ag.maxKm) + " km. " : "";
+    out.push(["🎯", "Para completar la semana", "Te faltan " + nf(ag.remaining) + " km. " + long + "Ritmo cómodo orientativo: " + easyRange(d) + "/km."]);
+  }
+  const past = (d.weekly_km || []).filter((w) => w.start < d.week.start).slice(-4);
+  if (past.length === 4) {
+    const avg = past.reduce((s, w) => s + w.km, 0) / 4;
+    if (avg > 0 && d.week.target > avg * 1.15) out.push(["📈", "Subida de carga", "El objetivo de " + d.week.target + " km es un " + Math.round((d.week.target / avg - 1) * 100) + "% más que tu media de las últimas 4 semanas (" + nf(avg) + " km). Sube de forma gradual y escucha a tu cuerpo."]);
+  }
+  if (S.pace_28d && S.pace_prev_28d) {
+    const diff = S.pace_prev_28d - S.pace_28d;
+    if (diff >= 5) out.push(["🚀", "Ritmo mejorando", "Tu ritmo medio es " + Math.round(diff) + " s/km más rápido que el mes anterior (" + pace(S.pace_28d) + " vs " + pace(S.pace_prev_28d) + ")."]);
+    else if (diff <= -10) out.push(["🧘", "Ritmo más lento", "Tu ritmo medio ha subido " + Math.round(-diff) + " s/km respecto al mes anterior. Revisa descanso y volumen antes de apretar."]);
+  }
+  if (level === 2 || L.km >= 18) out.push(["🥤", "Recuperación", "10 minutos de movilidad o foam roller y reponer líquidos y electrolitos ayudan a llegar mejor a la siguiente sesión."]);
+  return out.slice(0, 4);
+}
+
+// ---- pintado ----
+let lastLoad = 0, animFrame = 0;
+
+function animateTrack(pct) {
+  const fg = $("trackFg"), runner = $("runner");
+  const L = fg.getTotalLength();
+  fg.style.strokeDasharray = L;
+  const set = (p) => {
+    fg.style.strokeDashoffset = L - L * p;
+    const pt = fg.getPointAtLength(L * p);
+    runner.setAttribute("x", pt.x); runner.setAttribute("y", pt.y + 7);
+  };
+  cancelAnimationFrame(animFrame);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || pct <= 0) { set(pct); return; }
+  const t0 = performance.now(), dur = 1300;
+  const step = (t) => {
+    const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    set(pct * e);
+    if (k < 1) animFrame = requestAnimationFrame(step);
+  };
+  set(0); animFrame = requestAnimationFrame(step);
+}
+
+function render(d) {
+  const today = todayKey();
+  const age = Date.now() - Date.parse(d.generated_at);
+  $("hello").textContent = "🏃 Hola" + (OWNER ? ", " + OWNER : "");
+  const wtr = d.trajectory ? d.trajectory.weeks_to_race : null;
+  $("todayLine").textContent = cap(fmtLong(today)) + (wtr == null || wtr < 0 ? "" : wtr <= 2 ? " · tapering" : " · fase de carga");
+  $("syncTxt").textContent = "Strava · " + ago(age);
+  $("syncDot").className = "dot" + (age > 24 * 3600e3 ? " bad" : age > 3 * 3600e3 ? " warn" : "");
+  if (d.streak_weeks) { $("streakVal").textContent = d.streak_weeks; $("streakBadge").hidden = false; }
+
+  const stale = $("stale");
+  if (age > 6 * 3600e3) { stale.hidden = false; stale.innerHTML = "⚠️ <b>Datos sin actualizar " + ago(age) + ".</b> Revisa la pestaña Actions de tu repositorio en GitHub."; }
+  else if (d.week.start !== mondayOf(today)) { stale.hidden = false; stale.innerHTML = "⚠️ <b>Los datos son de otra semana.</b> El actualizador no ha corrido desde entonces."; }
+  else stale.hidden = true;
+
+  // estadísticas
+  const S = d.stats || {};
+  $("stKm").textContent = nf(S.km_180d || 0, 0) + " km";
+  $("stRuns").textContent = S.runs_180d || 0;
+  $("stLong").textContent = nf(S.longest_km || 0) + " km";
+  if (d.prediction) { $("stPred").textContent = hm(d.prediction.marathon_sec); $("stPredLbl").textContent = "Maratón estimado"; }
+  else { $("stPred").textContent = "–"; $("stPredLbl").textContent = "Sin carrera reciente"; }
+
+  // meta
+  const g = d.goal, days = diffDays(g.date, today);
+  $("goalTitle").textContent = "Meta: " + g.name;
+  $("daysLeft").textContent = days >= 0 ? days : "🎉";
+  $("weeksLeft").textContent = days >= 0 ? nf(days / 7) : "–";
+  const chips = $("chips"); chips.replaceChildren();
+  if (days >= 0) {
+    const fut = d.plan.filter((p) => p[0] >= mondayOf(today));
+    const cut = fut.find((p, i) => i > 0 && p[1] < fut[i - 1][1]);
+    const peak = fut.reduce((a, b) => (!a || b[1] > a[1] ? b : a), null);
+    const taperKey = addDays(mondayOf(g.date), -7);
+    const taper = fut.find((p) => p[0] === taperKey);
+    [["Próxima descarga", cut], ["Semana pico", peak], ["Empieza tapering", taper]].forEach(([t, p]) => {
+      if (!p) return;
+      const c = el("div", "chip", t); c.appendChild(document.createElement("br")); c.appendChild(el("b", null, fmtShort(p[0]) + " · " + p[1] + " km")); chips.appendChild(c);
+    });
+  }
+  const tb = $("trajBox"), tm = days >= 0 ? trajectoryMsg(d) : null;
+  if (tm) { tb.hidden = false; tb.className = "box " + tm[0]; tb.innerHTML = tm[1]; } else tb.hidden = true;
+  const pb = $("paceBox");
+  if (d.prediction && days >= 0) { pb.hidden = false; pb.innerHTML = "Ritmo objetivo estimado: <b>" + pace(d.prediction.pace_sec) + "/km</b> (Riegel, desde tu mejor carrera oficial reciente de " + nf(d.prediction.from_km) + " km)"; }
+  else pb.hidden = true;
+
+  // objetivo semanal
+  const { target, km } = d.week;
+  const ag = buildAgenda(d, today);
+  const pct = target > 0 ? Math.min(1, km / target) : 0;
+  $("tDone").textContent = nf(km); $("tTarget").textContent = target; $("tLeft").textContent = nf(ag.remaining);
+  $("trackPct").textContent = Math.round(pct * 100) + "%";
+  const [lvl, msg] = weekStatus(d, ag);
+  const wa = $("weekAlert"); wa.className = "box " + lvl; wa.innerHTML = msg;
+
+  // agenda
+  const grid = $("days"); grid.replaceChildren();
+  ag.items.forEach((it) => {
+    const c = el("div", "day" + (it.isToday ? " today" : "") + (it.state === "rest" ? " rest" : ""));
+    c.appendChild(el("div", "dow", DOW[it.i])); c.appendChild(el("div", "dd", fmtShort(it.date)));
+    if (it.state === "done") {
+      c.appendChild(el("div", "ico", "✅")); c.appendChild(el("div", "type", "Carrera")); c.appendChild(el("div", "km", nf(it.km) + " km" + (it.pace ? " · " + pace(it.pace) : "")));
+    } else if (it.state === "plan") {
+      c.appendChild(el("div", "ico", it.ico)); c.appendChild(el("div", "type", it.t)); c.appendChild(el("div", "km", nf(it.km) + " km"));
+      const b = el("button", "gbtn", "⌚ Copiar entreno");
+      b.dataset.txt = it.i === 1 && it.t === "Series / umbral"
+        ? DOW[it.i] + " " + fmtShort(it.date) + ": Series, " + nf(it.km) + " km en total (2 km calentamiento + series a ritmo fuerte controlado + 2 km suaves)"
+        : DOW[it.i] + " " + fmtShort(it.date) + ": " + it.t + " " + nf(it.km) + " km, ritmo " + easyRange(d) + "/km";
+      c.appendChild(b);
+    } else {
+      c.appendChild(el("div", "ico", "😴")); c.appendChild(el("div", "type", "Descanso")); c.appendChild(el("div", "km", "\u00a0"));
+    }
+    grid.appendChild(c);
+  });
+
+  // recomendaciones
+  const rl = $("recos"); rl.replaceChildren();
+  buildRecos(d, today, ag).forEach(([ico, t, tx]) => {
+    const r = el("div", "reco"); r.appendChild(el("div", "ri", ico));
+    const bx = el("div"); bx.appendChild(el("b", null, t)); bx.appendChild(document.createElement("br")); bx.appendChild(document.createTextNode(tx)); r.appendChild(bx); rl.appendChild(r);
+  });
+
+  // carreras (solo futuras)
+  const rc = $("races"); rc.replaceChildren();
+  const up = RACES.filter((r) => r.d >= today).sort((a, b) => a.d.localeCompare(b.d)).slice(0, 4);
+  if (!up.length) rc.appendChild(el("div", "note", "No hay carreras guardadas próximas. Pídele a Claude que busque más y edita la lista RACES en index.html."));
+  up.forEach((r) => {
+    const c = el("div", "race"); c.appendChild(el("div", "rname", r.n));
+    c.appendChild(el("div", "rmeta", fmtShort(r.d) + " · " + r.dist + " · " + r.loc + " · " + rel(diffDays(r.d, today))));
+    c.appendChild(el("div", "rnote", r.note)); rc.appendChild(c);
+  });
+
+  $("foot").textContent = "Datos de Strava · sincronizado " + new Date(d.generated_at).toLocaleString("es-ES", { timeZone: TZ, dateStyle: "medium", timeStyle: "short" });
+  $("loading").hidden = true; $("app").hidden = false;
+  animateTrack(pct);
+}
+
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch (e) {
+    const ta = document.createElement("textarea"); ta.value = t; ta.style.cssText = "position:fixed;opacity:0";
+    document.body.appendChild(ta); ta.select(); let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e2) {}
+    ta.remove(); return ok;
+  }
+}
+
+async function load() {
+  lastLoad = Date.now();
+  try {
+    const res = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    render(await res.json());
+    $("err").hidden = true;
+  } catch (e) {
+    $("loading").hidden = true;
+    $("err").hidden = false;
+    $("errMsg").textContent = "Comprueba que el workflow de GitHub Actions se ha ejecutado al menos una vez (" + e.message + ").";
+  }
+}
+
+$("days").addEventListener("click", async (e) => {
+  const b = e.target.closest(".gbtn"); if (!b) return;
+  const ok = await copyText(b.dataset.txt), old = b.textContent;
+  b.textContent = ok ? "✓ Copiado" : "No se pudo"; b.classList.toggle("ok", ok);
+  setTimeout(() => { b.textContent = old; b.classList.remove("ok"); }, 1800);
+});
+$("refreshBtn").addEventListener("click", load);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - lastLoad > 5 * 60e3) load(); });
+setInterval(() => { if (!document.hidden) load(); }, 15 * 60e3);
+load();
+</script>
+</body>
+</html>

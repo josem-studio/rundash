@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RUNDASH
 
 App web personal para analizar entrenamientos (running y ciclismo) y preparar carreras de larga distancia.
@@ -21,3 +22,6 @@ App web personal para analizar entrenamientos (running y ciclismo) y preparar ca
    npm run dev
    ```
 5. Abre el enlace indicado en la terminal en tu navegador.
+=======
+# rundash
+>>>>>>> af7409307454a1538053bda05ee0048c067f8701
