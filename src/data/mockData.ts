@@ -1,4 +1,4 @@
-import { Activity } from '../types';
+import type { Activity } from '../types';
 
 export const MOCK_ACTIVITIES: Activity[] = [
   {
@@ -75,10 +75,12 @@ export const MOCK_ACTIVITIES: Activity[] = [
 
 export const MOCK_GOALS = {
   weekly: {
+    type: 'weekly' as const,
     target: 50,
     current: 20.5,
   },
   monthly: {
+    type: 'monthly' as const,
     target: 200,
     current: 156.8,
   },

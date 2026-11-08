@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Activity } from '../types';
+import type { Activity } from '../types';
 import { formatDuration, formatDate, getPaceLabel } from '../utils/formatters';
-import { Activity as ActivityIcon, Clock, Heart, Calendar, Filter } from 'lucide-react';
+import { Activity as ActivityIcon } from 'lucide-react';
 
 interface ActivitiesProps {
   activities: Activity[];

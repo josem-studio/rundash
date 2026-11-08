@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { MOCK_CHART_DATA } from '../data/mockData';
-import { Activity, Goal } from '../types';
+import type { Activity, Goal } from '../types';
 import { formatDuration } from '../utils/formatters';
 import { Activity as ActivityIcon, Timer, TrendingUp, Zap } from 'lucide-react';
 
