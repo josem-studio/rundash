@@ -1,15 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --color-orange-500: #f97316;
-  --color-gray-900: #111827;
-  --color-gray-800: #1f2937;
-  --color-gray-700: #374151;
-  --color-gray-400: #9ca3af;
+  /* Paleta SG RUNNING CLUB - "Vacila y Corre" */
+  --color-red-600: #e60000;
+  --color-red-500: #ff0000;
+  --color-brand-red: #ff0000;
+
+  /* Escala de Grises Premium / Dark Mode */
+  --color-bg-app: #050505;
+  --color-bg-card: #0f0f0f;
+  --color-border-card: #1f1a1a; /* Darker red-tinted border */
+  --color-text-main: #ffffff;
+  --color-text-muted: #888888;
+  --color-text-dimmed: #444444;
+
+  /* Colores de soporte */
+  --color-mint-500: #a7f3d0; /* Tint of the background in logo image */
 }
 
 @layer base {
   body {
-    @apply bg-gray-900 text-gray-100 antialiased;
+    @apply bg-bg-app text-text-main antialiased selection:bg-brand-red/30;
+    font-family: 'Inter', system-ui, sans-serif;
   }
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1a1a;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
 }

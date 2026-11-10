@@ -1,83 +1,100 @@
-import type { Activity } from '../types';
+import { MOCK_ACTIVITIES } from './mockActivities';
+export { MOCK_ACTIVITIES };
+import type { AthleteProfile, Goals, TrainingDay } from '../types';
 
-export const MOCK_ACTIVITIES: Activity[] = [
+// Mock data for demonstration purposes only
+const mockProfile: AthleteProfile = {
+  name: 'Juan Deportista',
+  age: 40,
+  weight: 63.3,
+  height: 166,
+  device: 'Garmin Forerunner 165',
+  weeklyRunningGoal: 40,
+  monthlyRunningGoal: 200,
+  primaryGoalText: 'Preparar una media maratón',
+};
+
+const mockTrainingDays: TrainingDay[] = [
   {
-    id: '1',
-    date: '2026-11-07',
-    type: 'Running',
-    distance: 12.5,
-    duration: 3600 + 450, // 1h 07m 30s
-    pace: '5:24',
-    heartRate: 145,
-    title: 'Rodaje suave Z2',
+    id: '2026-11-04',
+    dayOfWeek: 'Lunes',
+    date: '2026-11-04',
+    title: 'Descanso',
+    type: 'Rest',
+    completed: true,
+    intensity: 'Descanso',
   },
   {
-    id: '2',
+    id: '2026-11-05',
+    dayOfWeek: 'Martes',
     date: '2026-11-05',
+    title: 'Running suave',
     type: 'Running',
-    distance: 8.0,
-    duration: 2400, // 40m
-    pace: '5:00',
-    heartRate: 152,
-    title: 'Series 4x1000m',
+    plannedDistance: 8.0,
+    plannedDuration: '40 min',
+    intensity: 'Suave',
+    completed: true,
   },
   {
-    id: '3',
-    date: '2026-11-03',
-    type: 'Cycling',
-    distance: 45.2,
-    duration: 5400 + 1200, // 1h 50m
-    pace: '24.6',
-    heartRate: 132,
-    title: 'Salida regenerativa',
+    id: '2026-11-06',
+    dayOfWeek: 'Miércoles',
+    date: '2026-11-06',
+    title: 'Fuerza',
+    type: 'Strength',
+    intensity: 'Moderado',
+    completed: true,
   },
   {
-    id: '4',
-    date: '2026-11-01',
+    id: '2026-11-07',
+    dayOfWeek: 'Jueves',
+    date: '2026-11-07',
+    title: 'Series',
     type: 'Running',
-    distance: 21.1,
-    duration: 6300 + 300, // 1h 50m
-    pace: '5:12',
-    heartRate: 158,
-    title: 'Media Maratón entrenamiento',
+    plannedDistance: 10.0,
+    plannedDuration: '60 min',
+    intensity: 'Alto',
+    completed: true,
   },
   {
-    id: '5',
-    date: '2026-10-30',
+    id: '2026-11-08',
+    dayOfWeek: 'Viernes',
+    date: '2026-11-08',
+    title: 'Descanso',
+    type: 'Rest',
+    completed: true,
+    intensity: 'Descanso',
+  },
+  {
+    id: '2026-11-09',
+    dayOfWeek: 'Sábado',
+    date: '2026-11-09',
+    title: 'Running',
     type: 'Running',
-    distance: 10.0,
-    duration: 3000, // 50m
-    pace: '5:00',
-    heartRate: 148,
-    title: 'Tirada 10k',
+    plannedDistance: 12.5,
+    plannedDuration: '1h 07m',
+    intensity: 'Suave',
+    completed: true,
   },
   {
-    id: '6',
-    date: '2026-10-28',
-    type: 'Cycling',
-    distance: 60.5,
-    duration: 7200 + 1800, // 2h 30m
-    pace: '24.2',
-    heartRate: 135,
-    title: 'Fondo suave',
-  },
-  {
-    id: '7',
-    date: '2026-10-25',
+    id: '2026-11-10',
+    dayOfWeek: 'Domingo',
+    date: '2026-11-10',
+    title: 'Rodaje largo',
     type: 'Running',
-    distance: 15.0,
-    duration: 4500 + 300, // 1h 20m
-    pace: '5:20',
-    heartRate: 142,
-    title: 'Rodaje largo dominical',
+    plannedDistance: 15.0,
+    plannedDuration: '1h 20m',
+    intensity: 'Moderado',
+    completed: true,
   },
 ];
 
-export const MOCK_GOALS = {
+export const MOCK_PROFILE = mockProfile;
+
+export const MOCK_GOALS: Goals = {
   weekly: {
     type: 'weekly' as const,
-    target: 50,
-    current: 20.5,
+    target: 40,
+    current: 35.5,
   },
   monthly: {
     type: 'monthly' as const,
@@ -85,6 +102,8 @@ export const MOCK_GOALS = {
     current: 156.8,
   },
 };
+
+export const MOCK_TRAINING_DAYS = mockTrainingDays;
 
 export const MOCK_CHART_DATA = [
   { name: 'Lun', km: 0 },
