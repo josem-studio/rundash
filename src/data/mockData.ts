@@ -94,12 +94,12 @@ export const MOCK_GOALS: Goals = {
   weekly: {
     type: 'weekly' as const,
     target: 40,
-    current: 35.5,
+    current: 66.6,
   },
   monthly: {
     type: 'monthly' as const,
     target: 200,
-    current: 156.8,
+    current: 172.3,
   },
 };
 

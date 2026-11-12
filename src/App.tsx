@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { activityService } from './services/dataService';
 import type { Activity } from './types';
 import Sidebar from './components/Sidebar';
+import MobileNav from './components/MobileNav';
 import Dashboard from './components/Dashboard';
 import Activities from './components/Activities';
 import Goals from './components/Goals';
 import Stats from './components/Stats';
-import { StravaConnect } from './components/StravaConnect';
 import { CoachChat } from './components/CoachChat';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Bot } from 'lucide-react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -30,25 +32,20 @@ function App() {
   }, []);
 
   return (
-    <div className="flex bg-[#0a0a0a] min-h-screen">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+    <div className="flex bg-[#08090B] min-h-screen text-[#F4F4F5] selection:bg-[#ff0000]/30 pb-20 lg:pb-0">
+      <div className="hidden lg:block w-64 shrink-0">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
 
-      <main className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-7xl mx-auto mb-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <StravaConnect onSyncSuccess={loadActivities} />
-          </div>
-          <div className="lg:col-span-1">
-             <CoachChat activities={activities} goals={goals} />
-          </div>
-        </div>
+      <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
+      <main className="flex-1 p-4 lg:p-8 overflow-y-auto w-full">
         {loading ? (
-          <div className="flex items-center justify-center h-64 text-[#a3a3a3]">
-            <p className="text-sm font-medium">Cargando actividades...</p>
+          <div className="flex items-center justify-center h-64 text-[#8B929E]">
+            <p className="text-sm font-medium animate-pulse">Cargando...</p>
           </div>
         ) : (
-          <>
+          <div className="max-w-7xl mx-auto">
             {activeTab === 'dashboard' && (
               <Dashboard activities={activities} goals={goals} profile={profile} trainingDays={trainingDays} />
             )}
@@ -61,9 +58,21 @@ function App() {
             {activeTab === 'stats' && (
               <Stats activities={activities} />
             )}
-          </>
+          </div>
         )}
       </main>
+
+      {/* Floating Action Button for Coach */}
+      <Dialog>
+        <DialogTrigger>
+          <button className="fixed bottom-24 lg:bottom-8 right-6 lg:right-8 w-14 h-14 bg-[#ff0000] rounded-full shadow-2xl shadow-[#ff0000]/30 flex items-center justify-center text-white hover:scale-105 transition-transform z-50">
+            <Bot size={24} />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="max-w-[400px] p-0 border-none bg-transparent">
+          <CoachChat activities={activities} goals={goals} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

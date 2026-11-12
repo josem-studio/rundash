@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import type { Activity } from '../types';
-import { formatDuration, formatDate, getPaceLabel } from '../utils/formatters';
-import { Activity as ActivityIcon } from 'lucide-react';
+import { formatDate, getPaceLabel } from '../utils/formatters';
+import { Activity as ActivityIcon, ChevronRight } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 interface ActivitiesProps {
   activities: Activity[];
@@ -9,107 +11,70 @@ interface ActivitiesProps {
 
 const Activities: React.FC<ActivitiesProps> = ({ activities }) => {
   const [filter, setFilter] = useState<'all' | 'running' | 'cycling'>('all');
-  const [timeRange, setTimeRange] = useState<'week' | 'month' | 'all'>('week');
-
-  const filteredActivities = activities.filter((activity) => {
-    const isTypeMatch = filter === 'all' || activity.type.toLowerCase() === filter;
-    const isDateMatch = () => {
-      const activityDate = new Date(activity.date);
-      const now = new Date();
-      const weekAgo = new Date();
-      weekAgo.setDate(now.getDate() - 7);
-      const monthAgo = new Date();
-      monthAgo.setMonth(now.getMonth() - 1);
-
-      if (timeRange === 'week') return activityDate >= weekAgo;
-      if (timeRange === 'month') return activityDate >= monthAgo;
-      return true; // 'all'
-    };
-
-    return isTypeMatch && isDateMatch();
+  const filtered = activities.filter((a) => {
+    const typeMatch = filter === 'all' || a.type.toLowerCase() === filter;
+    return typeMatch;
   });
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold text-white">Entrenamientos</h2>
-        <div className="flex space-x-4">
-          <button
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors"
-            onClick={() => setFilter('all')}
-          >
-            <ActivityIcon size={16} />
-            <span>Todos</span>
-          </button>
-          <button
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors"
-            onClick={() => setFilter('running')}
-          >
-            <ActivityIcon size={16} />
-            <span>Correr</span>
-          </button>
-          <button
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors"
-            onClick={() => setFilter('cycling')}
-          >
-            <ActivityIcon size={16} />
-            <span>Ciclismo</span>
-          </button>
+    <div className="space-y-6 animate-in fade-in duration-500 max-w-7xl mx-auto">
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#1a1212]">
+        <div>
+          <h2 className="text-3xl font-black text-white tracking-tight uppercase italic">Historial</h2>
+          <p className="text-[#555555] text-sm mt-1 font-medium">Análisis profundo de tus sesiones.</p>
         </div>
-      </div>
+        <div className="flex bg-[#0a0a0a] p-1 rounded-2xl border border-[#1a1212]">
+          {(['all', 'running', 'cycling'] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === f ? 'bg-[#ff0000] text-white shadow-lg' : 'text-[#555555]'}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      </header>
 
-      <div className="flex space-x-4">
-        <button
-          className={`px-4 py-2 rounded-lg border border-gray-700 ${timeRange === 'week' ? 'bg-orange-500 text-white' : 'bg-gray-800 hover:bg-gray-700'}`}
-          onClick={() => setTimeRange('week')}
-        >
-          Última semana
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg border border-gray-700 ${timeRange === 'month' ? 'bg-orange-500 text-white' : 'bg-gray-800 hover:bg-gray-700'}`}
-          onClick={() => setTimeRange('month')}
-        >
-          Último mes
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg border border-gray-700 ${timeRange === 'all' ? 'bg-orange-500 text-white' : 'bg-gray-800 hover:bg-gray-700'}`}
-          onClick={() => setTimeRange('all')}
-        >
-          Todos
-        </button>
-      </div>
-
-      <div className="overflow-x-auto">
-        <table className="w-full bg-gray-800 rounded-xl border border-gray-700">
-          <thead>
-            <tr className="bg-gray-900/50 border-b border-gray-700">
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Fecha</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Actividad</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Distancia</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Duración</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Ritmo</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">FC</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-700">
-            {filteredActivities.length > 0 ? (
-              filteredActivities.map((activity) => (
-                <tr key={activity.id} className="hover:bg-gray-700/50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{formatDate(activity.date)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{activity.title}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{activity.distance.toFixed(1)} km</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{formatDuration(activity.duration)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{activity.pace} {getPaceLabel(activity.type)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{activity.heartRate ? `${activity.heartRate} bpm` : '-'}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="px-6 py-4 text-center text-gray-500">No hay entrenamientos en este periodo.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="grid grid-cols-1 gap-3">
+        {filtered.map((activity) => (
+          <Dialog key={activity.id}>
+            <DialogTrigger render={
+              <Card className="p-4 flex items-center justify-between cursor-pointer hover:border-[#ff0000]/30 transition-all">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#0a0a0a] border border-[#1a1212] flex items-center justify-center">
+                    <ActivityIcon size={20} className="text-[#ff0000]" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">{activity.title}</h4>
+                    <p className="text-[10px] text-[#555555] font-medium uppercase tracking-wider">{formatDate(activity.date)} · {activity.type}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-6">
+                  <div className="text-right">
+                    <p className="text-sm font-black text-white tabular-nums">{activity.distance} <span className="text-[9px] text-[#444444]">km</span></p>
+                  </div>
+                  <ChevronRight size={18} className="text-[#333333]" />
+                </div>
+              </Card>
+            } />
+            <DialogContent className="bg-[#0a0a0a] border-[#221515] text-white">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-black italic uppercase">{activity.title}</DialogTitle>
+              </DialogHeader>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="p-4 bg-[#111111] rounded-xl border border-[#221515]">
+                  <p className="text-[9px] text-[#555555] uppercase font-bold tracking-widest">Distancia</p>
+                  <p className="text-lg font-black text-white">{activity.distance} km</p>
+                </div>
+                <div className="p-4 bg-[#111111] rounded-xl border border-[#221515]">
+                  <p className="text-[9px] text-[#555555] uppercase font-bold tracking-widest">Ritmo</p>
+                  <p className="text-lg font-black text-white">{activity.pace} {getPaceLabel(activity.type)}</p>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        ))}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { AthleteProfile } from '../types';
-import { User, Target } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { User, Target, ChevronRight } from 'lucide-react';
 
 interface ProfileCardProps {
   profile: AthleteProfile;
@@ -8,41 +9,50 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
   return (
-    <div className="bg-[#141414] border border-[#262626] p-6 rounded-2xl max-w-md mx-auto">
-      <div className="flex items-center space-x-4 mb-6">
-        <div className="w-16 h-16 rounded-full bg-orange-500/10 border-2 border-orange-500/30 flex items-center justify-center">
-          <User size={32} className="text-orange-500" />
-        </div>
-        <div>
-          <h2 className="text-xl font-bold text-[#fafafa]">{profile.name}</h2>
-          <p className="text-[#a3a3a3] text-sm uppercase tracking-wider">Atleta</p>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <div className="border-t border-[#262626] pt-4">
-          <h3 className="text-[#a3a3a3] text-xs font-semibold uppercase tracking-wider mb-2">Objetivo Principal</h3>
-          <p className="text-[#fafafa] font-medium">"{profile.primaryGoalText}"</p>
+    <Card className="overflow-hidden border-none bg-gradient-to-br from-surface to-background">
+      <div className="p-8">
+        <div className="flex items-center justify-between mb-8">
+          <div className="relative group cursor-pointer">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-red-800 rounded-full blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+            <div className="relative w-16 h-16 rounded-full bg-surface border border-border flex items-center justify-center overflow-hidden">
+              <User size={32} className="text-white opacity-90" />
+            </div>
+            <div className="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-4 border-background rounded-full"></div>
+          </div>
+          <button className="p-2 rounded-xl bg-surface/50 border border-border hover:border-primary/50 transition-colors">
+            <ChevronRight size={20} className="text-muted-foreground" />
+          </button>
         </div>
 
-        <div className="border-t border-[#262626] pt-4">
-          <div className="flex items-center space-x-2 mb-3">
-            <Target size={18} className="text-orange-500" />
-            <h3 className="text-[#a3a3a3] text-xs font-semibold uppercase tracking-wider">Objetivos Semanales</h3>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-[#0a0a0a] p-3 rounded-xl border border-[#262626]">
-              <span className="text-[10px] text-[#a3a3a3] uppercase tracking-wider block mb-1">Running</span>
-              <p className="text-lg font-extrabold text-orange-500 font-mono">{profile.weeklyRunningGoal} km</p>
+        <div className="space-y-1">
+          <h2 className="text-2xl font-black text-white tracking-tighter uppercase italic">{profile.name}</h2>
+          <p className="text-xs font-bold text-primary uppercase tracking-[0.2em]">Member · SG Club</p>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-border/50">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Target size={18} className="text-primary" />
             </div>
-            <div className="bg-[#0a0a0a] p-3 rounded-xl border border-[#262626]">
-              <span className="text-[10px] text-[#a3a3a3] uppercase tracking-wider block mb-1">Mensual</span>
-              <p className="text-lg font-extrabold text-blue-500 font-mono">{profile.monthlyRunningGoal} km</p>
+            <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Meta Activa</span>
+          </div>
+          <p className="text-lg font-bold text-white leading-tight">
+            "{profile.primaryGoalText}"
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">Running</span>
+              <p className="text-xl font-black text-white font-mono">{profile.weeklyRunningGoal} <span className="text-[10px]">KM/W</span></p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">Mensual</span>
+              <p className="text-xl font-black text-white font-mono">{profile.monthlyRunningGoal} <span className="text-[10px]">KM/M</span></p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
